@@ -217,7 +217,17 @@ int main(void)
 		HAL_UART_Receive_IT(&huart1, usartRxBuff, 9);
 	}
 	if(CanMsgInFlag){
-		sprintf((char *)&usartBuff, "Toggle PIN%d %d\n", (int)dataPrep[0], (int)dataPrep[1]);
+		//sprintf((char *)&usartBuff, "Toggle PIN%d %d\n", (int)dataPrep[0], (int)dataPrep[1]);
+    sprintf((char * ) &usartBuff, "PS%i%i%i%i%i%i%i%i\n",
+          (int) dataPrep[0],
+          (int) dataPrep[1],
+          (int) dataPrep[2],
+          (int) dataPrep[3],
+          (int) dataPrep[4],
+          (int) dataPrep[5],
+          (int) dataPrep[6],
+          (int) dataPrep[7]
+    );
 		HAL_UART_Transmit(&huart1, (unsigned char *)usartBuff, strlen((char *)usartBuff), HAL_MAX_DELAY);
 		memset((char *)usartBuff, '\0', strlen((char *)usartBuff));
 		CanMsgInFlag = RESET;
